@@ -26,7 +26,7 @@ public class AdminController implements AdminApi {
     }
 
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        student.setUserId(id);
+        student.setStudentId(id);
         return studentRepository.save(student);
     }
 
@@ -44,7 +44,7 @@ public class AdminController implements AdminApi {
     }
 
     public Faculty updateFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
-        faculty.setUserId(id);
+        faculty.setFacultyId(id);
         return facultyRepository.save(faculty);
     }
 

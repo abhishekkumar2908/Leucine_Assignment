@@ -1,20 +1,22 @@
 package com.leucine.Assignment.dao;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 public class Admin {
     @Id
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long adminId;
 
     private String photo;
     private Long departmentId;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // Getters and Setters
 }

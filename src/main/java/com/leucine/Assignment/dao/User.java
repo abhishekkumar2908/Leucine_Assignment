@@ -1,24 +1,36 @@
 package com.leucine.Assignment.dao;
 
-
+import com.leucine.Assignment.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false, unique = true)
     private String password;
 
-    @ManyToOne
-    private Role role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private UserRole role;
 
+    @Column(nullable = false)
     private String name;
-    private String email;
-    private String phone;
 
-    // Getters and Setters
+    @Column(nullable = false)
+    private String email;
+
+    private String phone;
 }

@@ -10,7 +10,8 @@ import java.util.Set;
 @Entity
 public class Student {
     @Id
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studentId;
 
     private String photo;
     private Long departmentId;
