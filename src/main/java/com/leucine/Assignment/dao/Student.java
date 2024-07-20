@@ -1,9 +1,7 @@
 package com.leucine.Assignment.dao;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Set;
@@ -19,4 +17,9 @@ public class Student {
     private int year;
 
     @ManyToMany(mappedBy = "students")
-    private Set<Course> courses;}
+    private Set<Course> courses;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+}

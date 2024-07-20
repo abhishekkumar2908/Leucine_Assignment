@@ -5,7 +5,6 @@ import com.leucine.Assignment.dao.Faculty;
 import com.leucine.Assignment.dao.Student;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController

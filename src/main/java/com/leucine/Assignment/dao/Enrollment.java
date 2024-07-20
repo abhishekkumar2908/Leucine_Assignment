@@ -1,10 +1,7 @@
 package com.leucine.Assignment.dao;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -13,8 +10,11 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "student_id")
     private Long studentId;
-    private Long courseId;
 
-    // Getters and Setters
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
 }

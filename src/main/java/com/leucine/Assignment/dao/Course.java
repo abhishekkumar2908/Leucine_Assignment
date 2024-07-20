@@ -16,7 +16,6 @@ public class Course {
     private String title;
     private String description;
     private Long departmentId;
-    private Long facultyId;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")

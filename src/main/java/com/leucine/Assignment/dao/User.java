@@ -12,8 +12,10 @@ public class User {
     private Long id;
     private String username;
     private String password;
+
     @ManyToOne
     private Role role;
+
     private String name;
     private String email;
     private String phone;

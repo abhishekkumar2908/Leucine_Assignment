@@ -32,7 +32,7 @@ public class FacultyService {
     private UserRepository userRepository;
 
     public Set<Student> getClassList(Long facultyId) {
-        List<Course> courses = courseRepository.findByFacultyId(facultyId);
+        List<Course> courses = courseRepository.findByFaculty_UserId(facultyId);
         Set<Student> students = new HashSet<>();
         for (Course course : courses) {
             students.addAll(course.getStudents());
