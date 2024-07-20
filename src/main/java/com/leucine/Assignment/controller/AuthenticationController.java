@@ -1,6 +1,7 @@
 package com.leucine.Assignment.controller;
 
 
+import com.leucine.Assignment.UserRole;
 import com.leucine.Assignment.auth.AuthenticationApi;
 import com.leucine.Assignment.security.CustomUserDetailsService;
 import com.leucine.Assignment.security.JwtRequest;
@@ -31,7 +32,7 @@ public class AuthenticationController implements AuthenticationApi {
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-        final String token = jwtUtil.generateToken(userDetails.getUsername());
+        final String token = jwtUtil.generateToken(userDetails.getUsername(), UserRole.valueOf(authenticationRequest.getRole()));
 
         return new JwtResponse(token);
     }

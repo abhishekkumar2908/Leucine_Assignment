@@ -38,7 +38,7 @@ public class AdminSetupService {
                     .username("admin")
                     .email("admin@example.com")
                     .password("admin1234")
-                    .role(UserRole.ADMINISTRATOR)
+                    .role(UserRole.ADMIN)
                     .name("Admin User")
                     .phone("123-456-7890")
                     .build();

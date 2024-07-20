@@ -12,7 +12,7 @@ const Login = () => {
     const loginData = {
       username,
       password,
-      role
+      role,
     };
 
     try {
@@ -47,7 +47,9 @@ const Login = () => {
 
   return (
     <div className="login-container-wrapper">
-      <div className="login-container"> {/* Apply CSS class */}
+      <div className="login-container">
+        {" "}
+        {/* Apply CSS class */}
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <div>
