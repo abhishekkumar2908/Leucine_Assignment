@@ -31,7 +31,7 @@ public class AuthenticationController implements AuthenticationApi {
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-        final String token = jwtUtil.generateToken(String.valueOf(userDetails));
+        final String token = jwtUtil.generateToken(userDetails.getUsername());
 
         return new JwtResponse(token);
     }

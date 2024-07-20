@@ -32,7 +32,7 @@ public class FacultyService {
     private UserRepository userRepository;
 
     public Set<Student> getClassList(Long facultyId) {
-        List<Course> courses = courseRepository.findByFaculty_UserId(facultyId);
+        List<Course> courses = courseRepository.findByFaculty_FacultyId(facultyId);
         Set<Student> students = new HashSet<>();
         for (Course course : courses) {
             students.addAll(course.getStudents());
@@ -41,7 +41,7 @@ public class FacultyService {
     }
 
     public Faculty updateProfile(Long facultyId, Faculty updatedFaculty) {
-        Faculty faculty = facultyRepository.findById(facultyId)
+        Faculty faculty = facultyRepository.findByFacultyId(facultyId)
                 .orElseThrow(() -> new RuntimeException("Faculty not found"));
         User user = faculty.getUser();
         user.setEmail(updatedFaculty.getUser().getEmail());

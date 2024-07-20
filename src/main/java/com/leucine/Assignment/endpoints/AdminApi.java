@@ -15,13 +15,13 @@ public interface AdminApi {
 
 
 
-    @PostMapping("/students")
+    @PostMapping("/student")
     public Student addStudent(@RequestBody Student student);
 
-    @PutMapping("/students/{id}")
+    @PutMapping("/student/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student);
 
-    @DeleteMapping("/students/{id}")
+    @DeleteMapping("/student/{id}")
     public void deleteStudent(@PathVariable Long id);
 
     @GetMapping("/students")
@@ -36,6 +36,6 @@ public interface AdminApi {
     @DeleteMapping("/faculty/{id}")
     public void deleteFaculty(@PathVariable Long id);
 
-    @GetMapping("/faculty")
+    @GetMapping("/faculties")
     public List<Faculty> getAllFaculty() ;
 }

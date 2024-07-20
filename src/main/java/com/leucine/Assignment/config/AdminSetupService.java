@@ -43,8 +43,7 @@ public class AdminSetupService {
             user.setPhone("123-456-7890");
             user.setRole(UserRole.ADMINISTRATOR);
             user = userRepository.save(user);
-            //userRepository.flush();
-            System.out.println("Admin created" + user + " user id: " + user.getUserId());
+
 
 
             Admin admin = new Admin();

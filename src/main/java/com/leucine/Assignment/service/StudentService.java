@@ -14,7 +14,7 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     public Student getStudentByUserId(Long userId) {
-        return studentRepository.findByUserId(userId);
+        return studentRepository.findByStudentId(userId);
     }
 
     public List<Student> searchStudents(String name, Long departmentId, Integer year) {

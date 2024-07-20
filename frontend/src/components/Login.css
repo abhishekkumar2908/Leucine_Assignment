@@ -1,0 +1,53 @@
+/* Apply styling to the container to center it vertically and horizontally */
+.login-container-wrapper {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height: 100vh;           /* Full viewport height */
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%;              /* Ensure it takes up the full width up to max-width */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;  /* Optional: add background color to make it stand out */
+}
+
+.login-container h2 {
+  text-align: center;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container form div {
+  margin-bottom: 10px;
+}
+
+.login-container form label {
+  margin-bottom: 5px;
+}
+
+.login-container form input,
+.login-container form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container form button:hover {
+  background-color: #0056b3;
+}
