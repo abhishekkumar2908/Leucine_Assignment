@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-public interface AuthenticationApi {
+public interface LoginController {
 
     @PostMapping("/login")
     JwtResponse login(@RequestBody JwtRequest authenticationRequest) throws Exception;

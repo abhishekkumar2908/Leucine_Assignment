@@ -1,5 +1,6 @@
 package com.leucine.Assignment.controllerImpl;
 
+import com.leucine.Assignment.controller.StudentController;
 import com.leucine.Assignment.dao.Student;
 import com.leucine.Assignment.dto.StudentDTO;
 import com.leucine.Assignment.service.StudentService;
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class StudentControllerImpl implements com.leucine.Assignment.controller.StudentController {
+public class StudentControllerImpl implements StudentController {
     @Autowired
     private StudentService studentService;
 

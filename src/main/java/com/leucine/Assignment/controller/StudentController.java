@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping(name = "/api/students", produces = "application/json", consumes = "application/json")
 public interface StudentController {
 
 
     @PostMapping("/student")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public Student addStudent(@RequestBody StudentDTO student);
 
     @PutMapping("/student/{id}")
@@ -23,7 +22,7 @@ public interface StudentController {
     @DeleteMapping("/student/{id}")
     public void deleteStudent(@PathVariable Long id);
 
-    @GetMapping("/students")
+    @GetMapping("/")
     public List<Student> getAllStudents();
 
     @GetMapping("/{userId}")

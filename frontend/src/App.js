@@ -7,6 +7,7 @@ import FacultyDashboard from "./components/FacultyDashboard";
 import AdminDashboard from "./components/AdminDashboard.js";
 import StudentForm from "./components/StudentForm.js";
 import FacultyForm from "./components/FacultyForm.js";
+import ViewStudents from "./components/ViewStudents.js";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/add-student" element={<StudentForm />} />
           <Route path="/add-faculty" element={<FacultyForm />} />
-          
+          <Route path="view-students" element={<ViewStudents />} />
 
         </Routes>
       </div>
