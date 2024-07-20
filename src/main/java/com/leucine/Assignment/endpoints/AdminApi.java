@@ -2,6 +2,8 @@ package com.leucine.Assignment.endpoints;
 
 import com.leucine.Assignment.dao.Student;
 import com.leucine.Assignment.dao.Faculty;
+import com.leucine.Assignment.dto.FacultyDTO;
+import com.leucine.Assignment.dto.StudentDTO;
 import com.leucine.Assignment.repository.StudentRepository;
 import com.leucine.Assignment.repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public interface AdminApi {
 
 
     @PostMapping("/student")
-    public Student addStudent(@RequestBody Student student);
+    public Student addStudent(@RequestBody StudentDTO student);
 
     @PutMapping("/student/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student);
@@ -28,7 +30,7 @@ public interface AdminApi {
     public List<Student> getAllStudents();
 
     @PostMapping("/faculty")
-    public Faculty addFaculty(@RequestBody Faculty faculty);
+    public Faculty addFaculty(@RequestBody FacultyDTO faculty);
 
     @PutMapping("/faculty/{id}")
     public Faculty updateFaculty(@PathVariable Long id, @RequestBody Faculty faculty);

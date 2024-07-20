@@ -1,11 +1,19 @@
 package com.leucine.Assignment.dao;
 
 import com.leucine.Assignment.UserRole;
+import com.leucine.Assignment.service.PasswordEncoderListener;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
+@EntityListeners(PasswordEncoderListener.class)
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"username"}),
         @UniqueConstraint(columnNames = {"email"})
@@ -18,6 +26,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String username;
+
 
     @Column(nullable = false, unique = true)
     private String password;
