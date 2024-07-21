@@ -1,7 +1,8 @@
-package com.leucine.Assignment.controller;
+package com.leucine.Assignment.controllerImpl;
 
 
-import com.leucine.Assignment.auth.AuthenticationApi;
+import com.leucine.Assignment.UserRole;
+import com.leucine.Assignment.auth.LoginController;
 import com.leucine.Assignment.security.CustomUserDetailsService;
 import com.leucine.Assignment.security.JwtRequest;
 import com.leucine.Assignment.security.JwtResponse;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthenticationController implements AuthenticationApi {
+public class LoginControllerImpl implements LoginController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -31,7 +32,7 @@ public class AuthenticationController implements AuthenticationApi {
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-        final String token = jwtUtil.generateToken(String.valueOf(userDetails));
+        final String token = jwtUtil.generateToken(userDetails.getUsername(), UserRole.valueOf(authenticationRequest.getRole()));
 
         return new JwtResponse(token);
     }

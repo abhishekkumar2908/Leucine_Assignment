@@ -1,6 +1,7 @@
 package com.leucine.Assignment.security;
 
 
+import com.leucine.Assignment.UserRole;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,13 +13,15 @@ public class JwtRequest implements Serializable {
 
     private String username;
     private String password;
+    private String role;
 
     // need default constructor for JSON Parsing
     public JwtRequest() {
     }
 
-    public JwtRequest(String username, String password) {
+    public JwtRequest(String username, String password, String role) {
         this.setUsername(username);
         this.setPassword(password);
+        this.setRole(role);
     }
 }

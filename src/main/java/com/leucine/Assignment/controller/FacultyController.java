@@ -1,30 +1,36 @@
 package com.leucine.Assignment.controller;
 
+
 import com.leucine.Assignment.dao.Faculty;
 import com.leucine.Assignment.dao.Student;
-import com.leucine.Assignment.endpoints.FacultyApi;
-import com.leucine.Assignment.service.FacultyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.leucine.Assignment.dto.FacultyDTO;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
-public class FacultyController implements FacultyApi {
+@RestController
+@RequestMapping("/api/faculty")
+public interface FacultyController {
 
-    @Autowired
-    private FacultyService facultyService;
+    @PostMapping("/faculty")
+    public Faculty addFaculty(@RequestBody FacultyDTO faculty);
 
-    @Override
-    public Set<Student> getClassList(Long facultyId) {
-        return facultyService.getClassList(facultyId);
-    }
+    @PutMapping("/faculty/{id}")
+    public Faculty updateFaculty(@PathVariable Long id, @RequestBody Faculty faculty);
 
-    @Override
-    public Faculty updateProfile(Long facultyId, Faculty updatedFaculty) {
-        return facultyService.updateProfile(facultyId, updatedFaculty);
-    }
+    @DeleteMapping("/faculty/{id}")
+    public void deleteFaculty(@PathVariable Long id);
 
-    @Override
-    public Faculty getProfile(Long facultyId) {
-        return facultyService.getProfile(facultyId);
-    }
+    @GetMapping("/faculties")
+    public List<Faculty> getAllFaculty() ;
+
+    @GetMapping("/{facultyId}/class-list")
+    public Set<Student> getClassList(@PathVariable Long facultyId);
+
+    @PutMapping("/{facultyId}/update-profile")
+    public Faculty updateProfile(@PathVariable Long facultyId, @RequestBody Faculty updatedFaculty);
+
+    @GetMapping("/{facultyId}/profile")
+    public Faculty getProfile(@PathVariable Long facultyId);
 }
