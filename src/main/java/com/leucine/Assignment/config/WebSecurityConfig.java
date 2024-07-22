@@ -31,7 +31,13 @@ public class WebSecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/auth/login").permitAll() // Allow unauthenticated access to login and register
+//                        .requestMatchers("api/faculty/**").hasRole("FACULTY")
+//                        .requestMatchers("api/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("api/student/**").hasRole("STUDENT")
+                                .requestMatchers("/api/**").permitAll()
+
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
