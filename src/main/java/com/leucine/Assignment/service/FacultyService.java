@@ -44,13 +44,14 @@ public class FacultyService {
                 .name(facultyDTO.getName())
                 .phone(facultyDTO.getPhone())
                 .build();
-        User savedUser = userRepository.save(user);
 
         Faculty faculty = new Faculty();
-        faculty.setUser(savedUser);
         faculty.setDepartmentId(facultyDTO.getDepartmentId());
         faculty.setPhoto(facultyDTO.getPhoto());
         faculty.setOfficeHours(facultyDTO.getOfficeHours());
+
+        User savedUser = userRepository.save(user);
+        faculty.setUser(savedUser);
 
         return facultyRepository.save(faculty);
     }

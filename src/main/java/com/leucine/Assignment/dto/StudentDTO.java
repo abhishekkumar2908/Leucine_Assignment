@@ -1,5 +1,6 @@
 package com.leucine.Assignment.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -15,6 +16,8 @@ public class StudentDTO {
     // Student fields
     private Long departmentId;
     private String photo;
+
+    @NotBlank(message = "Study year is mandatory")
     private String year;
 
     // Getters and Setters

@@ -2,6 +2,7 @@ package com.leucine.Assignment.dao;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Set;
@@ -14,8 +15,11 @@ public class Student {
     private Long studentId;
 
     private String photo;
+
     private Long departmentId;
-    private int year;
+
+    @NotNull(message = "Study year is mandatory")
+    private String year;
 
     @ManyToMany(mappedBy = "students")
     private Set<Course> courses;

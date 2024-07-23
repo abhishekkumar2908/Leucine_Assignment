@@ -10,31 +10,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
-@RequestMapping("/api/faculty")
+@RequestMapping("/api/faculties")
 public interface FacultyController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/faculty")
-    public Faculty addFaculty(@RequestBody FacultyDTO faculty);
+    Faculty addFaculty(@RequestBody FacultyDTO faculty);
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping("/faculty/{id}")
-    public Faculty updateFaculty(@PathVariable Long id, @RequestBody Faculty faculty);
+    Faculty updateFaculty(@PathVariable Long id, @RequestBody Faculty faculty);
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/faculty/{id}")
-    public void deleteFaculty(@PathVariable Long id);
+    void deleteFaculty(@PathVariable Long id);
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/faculties")
-    public List<Faculty> getAllFaculty() ;
+    List<Faculty> getAllFaculty() ;
 
     @GetMapping("/{facultyId}/class-list")
-    public Set<Student> getClassList(@PathVariable Long facultyId);
+    Set<Student> getClassList(@PathVariable Long facultyId);
 
     @PutMapping("/{facultyId}/update-profile")
-    public Faculty updateProfile(@PathVariable Long facultyId, @RequestBody Faculty updatedFaculty);
+    Faculty updateProfile(@PathVariable Long facultyId, @RequestBody Faculty updatedFaculty);
 
     @GetMapping("/{facultyId}/profile")
-    public Faculty getProfile(@PathVariable Long facultyId);
+    Faculty getProfile(@PathVariable Long facultyId);
 }

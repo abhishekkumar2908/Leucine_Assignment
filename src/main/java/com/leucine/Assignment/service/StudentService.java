@@ -32,13 +32,16 @@ public class StudentService {
                 .name(studentDTO.getName())
                 .phone(studentDTO.getPhone())
                 .build();
-        User savedUser = userRepository.save(user);
+
 
         Student student = new Student();
-        student.setUser(savedUser);
         student.setDepartmentId(studentDTO.getDepartmentId());
         student.setPhoto(studentDTO.getPhoto());
-        student.setYear(Integer.parseInt(studentDTO.getYear()));
+        student.setYear(studentDTO.getYear());
+
+        User savedUser = userRepository.save(user);
+        student.setUser(savedUser);
+
 
         return studentRepository.save(student);
     }
@@ -64,14 +67,15 @@ public class StudentService {
     }
 
     public void deleteStudent(@PathVariable Long id) {
-        Student student = studentRepository.findById(id)
+        Student getStudent = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
+
 
         // Delete the Student entity
         studentRepository.deleteById(id);
 
         // Delete the associated User entity
-        userRepository.deleteById(student.getUser().getUserId());
+        userRepository.deleteById(getStudent.getUser().getUserId());
     }
 
 

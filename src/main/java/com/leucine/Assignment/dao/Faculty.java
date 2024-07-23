@@ -2,6 +2,7 @@ package com.leucine.Assignment.dao;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.Set;
@@ -15,6 +16,8 @@ public class Faculty {
 
     private String photo;
     private Long departmentId;
+
+    @NotBlank(message = "Office hours are mandatory")
     private String officeHours;
 
     @OneToMany(mappedBy = "faculty")
