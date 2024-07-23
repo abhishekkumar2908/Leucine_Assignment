@@ -5,16 +5,22 @@ import com.leucine.Assignment.dao.Student;
 import com.leucine.Assignment.dto.StudentDTO;
 import com.leucine.Assignment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 public class StudentControllerImpl implements StudentController {
     @Autowired
     private StudentService studentService;
 
     @Override
-    public Student addStudent(StudentDTO student) {
-        return studentService.addStudent(student);
+    public ResponseEntity<String> addStudent(StudentDTO student) {
+        studentService.addStudent(student);
+        return ResponseEntity.ok("Student added successfully");
     }
 
     @Override

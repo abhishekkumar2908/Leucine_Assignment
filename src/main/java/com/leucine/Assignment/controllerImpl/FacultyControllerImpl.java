@@ -6,10 +6,12 @@ import com.leucine.Assignment.dao.Student;
 import com.leucine.Assignment.dto.FacultyDTO;
 import com.leucine.Assignment.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Set;
 
+@RestController
 public class FacultyControllerImpl implements FacultyController {
 
     @Autowired
