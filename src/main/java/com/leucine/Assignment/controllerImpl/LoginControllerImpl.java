@@ -1,7 +1,7 @@
 package com.leucine.Assignment.controllerImpl;
 
 
-import com.leucine.Assignment.UserRole;
+import com.leucine.Assignment.enums.UserRole;
 import com.leucine.Assignment.auth.LoginController;
 import com.leucine.Assignment.security.CustomUserDetailsService;
 import com.leucine.Assignment.security.JwtRequest;
