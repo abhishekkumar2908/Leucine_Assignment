@@ -16,6 +16,6 @@ public class AssignmentDTO {
     private String title;
     private String description;
     private LocalDateTime dueDate;
-    private MultipartFile fileUpload;
+    private MultipartFile data;
     private String createdBy;
 }

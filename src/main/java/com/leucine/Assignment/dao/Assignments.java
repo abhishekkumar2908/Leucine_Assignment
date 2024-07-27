@@ -21,14 +21,14 @@ public class Assignments {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "due_date", nullable = false)
+    @Column(name = "due_date")
     private LocalDateTime dueDate;
 
     @Lob
-    @Column(name = "data", nullable = false)
+    @Column(name = "data")
     private byte[] data;
 
     @Column(name = "created_by", nullable = false)

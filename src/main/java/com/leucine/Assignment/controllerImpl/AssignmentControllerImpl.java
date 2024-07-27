@@ -1,5 +1,6 @@
 package com.leucine.Assignment.controller;
 
+import com.leucine.Assignment.dao.Assignments;
 import com.leucine.Assignment.dto.AssignmentDTO;
 import com.leucine.Assignment.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,22 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/assignments")
+@RequestMapping(path = "/api/assignments", produces = "application/json")
 public class AssignmentControllerImpl implements AssignmentController {
 
     @Autowired
     private AssignmentService assignmentService;
 
-    @PostMapping(consumes = {"multipart/form-data"})
+    @Override
+    public Assignments createAssignmentNoFile(AssignmentDTO assignmentDTO) throws IOException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+        return assignmentService.createAssignment(assignmentDTO, userId);
+
+    }
+
+    @Override
     public ResponseEntity<Object> createAssignment(@ModelAttribute AssignmentDTO assignmentDTO) {
         // Get the current authenticated user's ID
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -29,4 +39,5 @@ public class AssignmentControllerImpl implements AssignmentController {
             return ResponseEntity.badRequest().build();
         }
     }
+
 }

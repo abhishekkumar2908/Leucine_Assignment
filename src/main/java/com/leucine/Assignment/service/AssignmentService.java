@@ -22,7 +22,7 @@ public class AssignmentService {
         assignment.setDueDate(assignmentDTO.getDueDate());
         assignment.setCreatedBy(userId);
 
-        MultipartFile file = assignmentDTO.getFileUpload();
+        MultipartFile file = assignmentDTO.getData();
         if (file != null && !file.isEmpty()) {
             assignment.setData(file.getBytes());
         }
