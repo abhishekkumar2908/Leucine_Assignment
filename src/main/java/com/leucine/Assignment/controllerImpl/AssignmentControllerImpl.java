@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/assignments")
-public class AssignmentController implements Assignment {
+public class AssignmentControllerImpl implements AssignmentController {
 
     @Autowired
     private AssignmentService assignmentService;

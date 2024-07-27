@@ -31,8 +31,8 @@ public class AdminSetupService {
         Boolean isTeacherExists = userRepository.existsByUserRole(UserRole.TEACHER);
         if (!isTeacherExists) {
             User user = User.builder()
-                    .username("teacher")
-                    .password(passwordEncoder.encode("teacher1234"))
+                    .username("teacher1")
+                    .password("t1234")
                     .userRole(UserRole.TEACHER)
                     .build();
             userRepository.save(user);
@@ -45,8 +45,8 @@ public class AdminSetupService {
         Boolean isStudentExists = userRepository.existsByUserRole(UserRole.STUDENT);
         if (!isStudentExists) {
             User user = User.builder()
-                    .username("student")
-                    .password(passwordEncoder.encode("student1234"))
+                    .username("student1")
+                    .password("s1234")
                     .userRole(UserRole.STUDENT)
                     .build();
             userRepository.save(user);
