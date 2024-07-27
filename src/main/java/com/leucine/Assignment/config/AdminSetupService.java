@@ -1,10 +1,8 @@
 package com.leucine.Assignment.config;
 
 
-import com.leucine.Assignment.UserRole;
-import com.leucine.Assignment.dao.Admin;
+import com.leucine.Assignment.enums.UserRole;
 import com.leucine.Assignment.dao.User;
-import com.leucine.Assignment.repository.AdminRepository;
 import com.leucine.Assignment.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
@@ -36,7 +34,7 @@ public class AdminSetupService {
 
             User user = User.builder()
                     .username("admin")
-                    .email("admin@example.com")
+
                     .password("admin1234")
                     .role(UserRole.ADMIN)
                     .name("Admin User")
@@ -45,13 +43,6 @@ public class AdminSetupService {
 
             user = userRepository.save(user);
 
-
-
-            Admin admin = new Admin();
-            admin.setUser(user);
-            admin.setPhoto("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50");
-            admin.setDepartmentId(1234L);
-            adminRepository.save(admin);
         }
         else {
             System.out.println("Admin already exists ");

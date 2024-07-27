@@ -1,8 +1,12 @@
 package com.leucine.Assignment.dao;
 
-import com.leucine.Assignment.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.leucine.Assignment.enums.UserRole;
 import com.leucine.Assignment.service.PasswordEncoderListener;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,22 +28,17 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Username is mandatory")
     private String username;
 
-
-    @Column(nullable = false, unique = true)
+    @JsonIgnore
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
     private UserRole role;
 
-    @Column(nullable = false)
-    private String name;
 
-    @Column(nullable = false)
-    private String email;
 
-    private String phone;
 }

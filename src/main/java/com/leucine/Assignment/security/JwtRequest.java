@@ -1,7 +1,6 @@
 package com.leucine.Assignment.security;
 
 
-import com.leucine.Assignment.UserRole;
 import lombok.Data;
 
 import java.io.Serializable;

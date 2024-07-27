@@ -1,6 +1,6 @@
 package com.leucine.Assignment.security;
 
-import com.leucine.Assignment.UserRole;
+import com.leucine.Assignment.enums.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
