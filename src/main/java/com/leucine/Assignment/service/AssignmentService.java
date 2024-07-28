@@ -2,6 +2,7 @@ package com.leucine.Assignment.service;
 
 import com.leucine.Assignment.dao.Assignments;
 import com.leucine.Assignment.dto.AssignmentDTO;
+import com.leucine.Assignment.enums.ClassName;
 import com.leucine.Assignment.repository.AssignmentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class AssignmentService {
         assignment.setDescription(assignmentDTO.getDescription());
         assignment.setDueDate(assignmentDTO.getDueDate());
         assignment.setCreatedBy(userId);
+        assignment.setClassName(ClassName.valueOf(assignmentDTO.getClassName().name()));
 
         MultipartFile file = assignmentDTO.getData();
         if (file != null && !file.isEmpty()) {
@@ -29,5 +31,9 @@ public class AssignmentService {
         }
 
         return assignmentsRepository.save(assignment);
+    }
+
+    public Object getAssignments(ClassName className, Long userId) {
+        return assignmentsRepository.findByClassName(className, userId);
     }
 }

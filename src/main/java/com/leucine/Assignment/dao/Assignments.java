@@ -1,6 +1,7 @@
 package com.leucine.Assignment.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.leucine.Assignment.enums.ClassName;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
@@ -37,4 +38,8 @@ public class Assignments {
 
     @Column(name = "created_by", nullable = false)
     private Long createdBy;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "class_name" , nullable = false)
+    private ClassName className;
 }
