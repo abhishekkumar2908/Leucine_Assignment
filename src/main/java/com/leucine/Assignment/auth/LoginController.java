@@ -5,7 +5,7 @@ import com.leucine.Assignment.security.JwtRequest;
 import com.leucine.Assignment.security.JwtResponse;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+
 @RequestMapping("/api/auth")
 public interface LoginController {
 

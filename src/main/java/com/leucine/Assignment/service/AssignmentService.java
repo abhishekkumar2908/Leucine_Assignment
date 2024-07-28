@@ -15,16 +15,18 @@ public class AssignmentService {
     @Autowired
     private AssignmentsRepository assignmentsRepository;
 
-    public Assignments createAssignment(AssignmentDTO assignmentDTO, String userId) throws IOException {
+    public Assignments createAssignment(AssignmentDTO assignmentDTO, Long userId) throws IOException {
         Assignments assignment = new Assignments();
         assignment.setTitle(assignmentDTO.getTitle());
         assignment.setDescription(assignmentDTO.getDescription());
         assignment.setDueDate(assignmentDTO.getDueDate());
         assignment.setCreatedBy(userId);
 
-        MultipartFile file = assignmentDTO.getFileUpload();
+        MultipartFile file = assignmentDTO.getData();
         if (file != null && !file.isEmpty()) {
             assignment.setData(file.getBytes());
+            assignment.setFile(file.getOriginalFilename());
+
         }
 
         return assignmentsRepository.save(assignment);

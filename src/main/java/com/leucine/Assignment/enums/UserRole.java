@@ -2,6 +2,5 @@ package com.leucine.Assignment.enums;
 
 public enum UserRole {
     STUDENT,
-    FACULTY,
-    ADMIN
+    TEACHER
 }

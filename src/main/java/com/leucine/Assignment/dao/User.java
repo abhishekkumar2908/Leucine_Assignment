@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.leucine.Assignment.enums.UserRole;
 import com.leucine.Assignment.service.PasswordEncoderListener;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,7 +35,7 @@ public class User {
 
 
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRole userRole;
 
 
 
