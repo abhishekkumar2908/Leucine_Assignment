@@ -17,10 +17,8 @@ const Login = () => {
       localStorage.setItem("token", response.data.token);
       // Redirect to the dashboard or appropriate page based on role
       const userRole = data.role.toUpperCase();
-      if (userRole === "ADMIN") {
-        window.location.href = "/admin-dashboard"; // Adjust the path as needed
-      } else if (userRole === "FACULTY") {
-        window.location.href = "/faculty-dashboard"; // Adjust the path as needed
+      if (userRole === "TEACHER") {
+        window.location.href = "/teacher-dashboard"; // Adjust the path as needed
       } else if (userRole === "STUDENT") {
         window.location.href = "/student-dashboard"; // Adjust the path as needed
       }
@@ -57,8 +55,7 @@ const Login = () => {
           <label>Role</label>
           <select {...register("role", { required: true })}>
             <option value="">Select role</option>
-            <option value="ADMIN">Admin</option>
-            <option value="FACULTY">Faculty</option>
+            <option value="TEACHER">Teacher</option>
             <option value="STUDENT">Student</option>
           </select>
           {errors.role && <span>This field is required</span>}
