@@ -69,7 +69,7 @@ public class FileControllerImpl implements FileController {
     @GetMapping("/file-path/{fileName}")
     @Override
     public ResponseEntity<String> getFileUrl(String fileName) {
-        return ResponseEntity.ok(serverAddress + "/api/assignments/files/" + fileName);
+        return ResponseEntity.ok(serverAddress +":8080"+ baseDirectory + fileName);
 
     }
 

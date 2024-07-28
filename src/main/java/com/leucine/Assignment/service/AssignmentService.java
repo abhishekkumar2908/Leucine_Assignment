@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AssignmentService {
@@ -50,4 +51,11 @@ public class AssignmentService {
     public List<Assignments> getAssignmentsByClass(ClassName className, Long createdBy) {
         return assignmentsRepository.findByClassNameAndCreatedBy(className, createdBy);
     }
+
+    public List<Assignments> getAssignmentsByTeacherAndClass(Long teacherId, ClassName className) {
+        return assignmentsRepository.findByCreatedBy(teacherId).stream()
+                .filter(assignment -> assignment.getClassName() == className)
+                .collect(Collectors.toList());
+    }
+
 }

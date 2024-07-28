@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,9 +22,11 @@ const Login = () => {
         localStorage.setItem('role', result.role);
 
         if (result.role === 'TEACHER') {
-          navigate('/teacher-dashboard');
+          window.location.href = '/';
         } else if (result.role === 'STUDENT') {
-          navigate('/student-dashboard');
+          window.location.href = '/student-dashboard';
+        } else {
+          window.location.href = '/';
         }
       } else {
         setErrorMessage('Invalid username or password.');

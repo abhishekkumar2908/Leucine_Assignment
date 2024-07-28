@@ -13,4 +13,6 @@ import org.hibernate.validator.constraints.UUID;
 @Repository
 public interface SubmittedAssignmentRepository extends JpaRepository<SubmittedAssignment, Long> {
     List<SubmittedAssignment> findAllByAssignmentIdIn(List<Long> assignmentIds);
+
+    List<SubmittedAssignment> findByAssignmentIdIn(List<Long> assignmentIds);
 }

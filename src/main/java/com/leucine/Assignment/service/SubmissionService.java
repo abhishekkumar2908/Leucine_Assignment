@@ -48,6 +48,11 @@ public class SubmissionService {
         return submissionsRepository.findAllByAssignmentIdIn(assignmentIds);
     }
 
+    public List<SubmittedAssignment> getSubmittedAssignmentsByAssignmentIds(List<Long> assignmentIds) {
+        Object submittedAssignmentRepository;
+        return submissionsRepository.findByAssignmentIdIn(assignmentIds);
+    }
+
 
 
 

@@ -3,6 +3,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import Login from "./components/Login";
 import TeacherDashboardPage from "./components/TeacherComponents/TeacherDashboardPage";
 import getUserRole from "./utils";
+import Header from "./components/Header";
 
 export const getRoutes = () => {
   const isLoggedIn = localStorage.getItem("token");
@@ -21,7 +22,7 @@ export const getRoutes = () => {
 
   const teacherRoutes = [
     {
-      path: "/teacher-dashboard*",
+      path: "/*",
       element: <TeacherDashboardPage />,
     },
   ];
@@ -37,6 +38,7 @@ const loadRoutes = () => {
     {
       element: (
         <>
+          <Header />
           <Outlet />
         </>
       ),
@@ -49,4 +51,3 @@ const loadRoutes = () => {
 const router = createBrowserRouter(loadRoutes());
 
 export { router };
- 
