@@ -1,10 +1,9 @@
 package com.leucine.Assignment.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -24,13 +23,18 @@ public class Assignments {
     @Column(name = "description")
     private String description;
 
+    @FutureOrPresent(message = "Due date must be in the present or future.")
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
+    @JsonIgnore
     @Lob
     @Column(name = "data")
     private byte[] data;
 
+    @Column(name = "file")
+    private String file;
+
     @Column(name = "created_by", nullable = false)
-    private String createdBy;
+    private Long createdBy;
 }

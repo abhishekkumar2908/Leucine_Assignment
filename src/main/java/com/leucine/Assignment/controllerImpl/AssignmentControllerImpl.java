@@ -1,8 +1,9 @@
-package com.leucine.Assignment.controller;
+package com.leucine.Assignment.controllerImpl;
 
-import com.leucine.Assignment.dao.Assignments;
+import com.leucine.Assignment.controller.AssignmentController;
 import com.leucine.Assignment.dto.AssignmentDTO;
 import com.leucine.Assignment.service.AssignmentService;
+import com.leucine.Assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -18,14 +19,8 @@ public class AssignmentControllerImpl implements AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @Override
-    public Assignments createAssignmentNoFile(AssignmentDTO assignmentDTO) throws IOException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
-
-        return assignmentService.createAssignment(assignmentDTO, userId);
-
-    }
+    @Autowired
+    private UserService userService;
 
     @Override
     public ResponseEntity<Object> createAssignment(@ModelAttribute AssignmentDTO assignmentDTO) {
@@ -34,7 +29,7 @@ public class AssignmentControllerImpl implements AssignmentController {
         String userId = authentication.getName();
 
         try {
-            return ResponseEntity.ok(assignmentService.createAssignment(assignmentDTO, userId));
+            return ResponseEntity.ok(assignmentService.createAssignment(assignmentDTO, userService.getUserId()));
         } catch (IOException e) {
             return ResponseEntity.badRequest().build();
         }
