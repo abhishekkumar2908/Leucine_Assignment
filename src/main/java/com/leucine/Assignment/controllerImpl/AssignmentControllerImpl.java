@@ -24,9 +24,8 @@ public class AssignmentControllerImpl implements AssignmentController {
 
     @Override
     public ResponseEntity<Object> createAssignment(@ModelAttribute AssignmentDTO assignmentDTO) {
-        // Get the current authenticated user's ID
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
+
+
 
         try {
             return ResponseEntity.ok(assignmentService.createAssignment(assignmentDTO, userService.getUserId()));

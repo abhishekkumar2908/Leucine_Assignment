@@ -1,5 +1,7 @@
 package com.leucine.Assignment.config;
 
+import com.leucine.Assignment.dao.Classes;
+import com.leucine.Assignment.enums.ClassName;
 import com.leucine.Assignment.enums.UserRole;
 import com.leucine.Assignment.dao.User;
 import com.leucine.Assignment.repository.UserRepository;
@@ -50,6 +52,10 @@ public class AdminSetupService {
                     .userRole(UserRole.STUDENT)
                     .build();
             userRepository.save(user);
+            Classes classes = Classes.builder()
+                    .studentId(user.getUserId())
+                    .className(ClassName.XI)
+                    .build();
         } else {
             System.out.println("Student already exists");
         }

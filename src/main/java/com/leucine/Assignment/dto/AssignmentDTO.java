@@ -18,7 +18,7 @@ public class AssignmentDTO {
     private LocalDateTime dueDate;
     private String file;
     private MultipartFile data;
-    private String createdBy;
+    private Long createdBy;
 
 
 }

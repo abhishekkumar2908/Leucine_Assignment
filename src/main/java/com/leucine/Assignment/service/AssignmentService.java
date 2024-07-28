@@ -24,7 +24,6 @@ public class AssignmentService {
 
         MultipartFile file = assignmentDTO.getData();
         if (file != null && !file.isEmpty()) {
-            assignment.setData(file.getBytes());
             assignment.setFile(file.getOriginalFilename());
 
         }

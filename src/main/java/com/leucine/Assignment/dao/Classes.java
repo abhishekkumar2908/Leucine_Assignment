@@ -13,7 +13,7 @@ import lombok.Data;
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
