@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class SubmittedAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "assignment_id", nullable = false)

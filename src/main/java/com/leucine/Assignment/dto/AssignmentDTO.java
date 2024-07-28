@@ -1,5 +1,6 @@
 package com.leucine.Assignment.dto;
 
+import com.leucine.Assignment.enums.ClassName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +17,9 @@ public class AssignmentDTO {
     private String title;
     private String description;
     private LocalDateTime dueDate;
-    private String file;
-    private MultipartFile data;
-    private String createdBy;
+    private MultipartFile file;
+    private Long createdBy;
+    private ClassName className;
 
 
 }
