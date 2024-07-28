@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class AssignmentDTO {
     private String title;
     private String description;
-    private LocalDateTime dueDate;
+    private String dueDate;
     private MultipartFile file;
     private Long createdBy;
     private ClassName className;

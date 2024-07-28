@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -65,7 +67,7 @@ public class AssignmentControllerImpl implements AssignmentController {
                 }
                 assignments.setTitle(assignmentDTO.getTitle());
                 assignments.setDescription(assignmentDTO.getDescription());
-                assignments.setDueDate(assignmentDTO.getDueDate());
+                assignments.setDueDate(LocalDateTime.parse(assignmentDTO.getDueDate(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)); // Parse dueDate
                 assignments.setClassName(ClassName.valueOf(assignmentDTO.getClassName().name()));
                 assignments.setFile(assignmentDTO.getFile().getOriginalFilename());
                 assignments.setCreatedBy(userService.getUserId());

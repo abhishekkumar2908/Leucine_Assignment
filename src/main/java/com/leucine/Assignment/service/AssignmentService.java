@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,7 @@ public class AssignmentService {
         Assignments assignment = new Assignments();
         assignment.setTitle(assignmentDTO.getTitle());
         assignment.setDescription(assignmentDTO.getDescription());
-        assignment.setDueDate(assignmentDTO.getDueDate());
+        assignment.setDueDate(LocalDateTime.parse(assignmentDTO.getDueDate(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)); // Parse dueDate
         assignment.setCreatedBy(userId);
         assignment.setClassName(ClassName.valueOf(assignmentDTO.getClassName().name()));
 
