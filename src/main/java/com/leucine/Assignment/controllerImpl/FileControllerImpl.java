@@ -10,12 +10,17 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@RequestMapping("/api/assignments")
 @RestController
 public class FileControllerImpl implements FileController {
 
@@ -25,6 +30,8 @@ public class FileControllerImpl implements FileController {
     @Value("${file.base-directory}")
     private String baseDirectory;
 
+
+    @GetMapping("/files/{id}")
     @Override
     public ResponseEntity<Resource> getFile(@PathVariable Long id) {
         try {
@@ -37,15 +44,31 @@ public class FileControllerImpl implements FileController {
             Resource resource = new UrlResource(filePath.toUri());
 
             if (resource.exists() || resource.isReadable()) {
+                // Determine the content type based on the file extension
+                String contentType = determineContentType(filePath);
+                if (contentType == null) {
+                    contentType = "application/octet-stream";
+                }
+
                 return ResponseEntity.ok()
-                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                        .contentType(MediaType.parseMediaType(contentType))
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                         .body(resource);
             } else {
                 return ResponseEntity.notFound().build();
             }
         } catch (Exception e) {
+            // Add logging here if needed
+            e.printStackTrace(); // Replace with proper logging
             return ResponseEntity.status(500).build();
+        }
+    }
+
+    private String determineContentType(Path filePath) {
+        try {
+            return Files.probeContentType(filePath);
+        } catch (IOException e) {
+            return null;
         }
     }
 
