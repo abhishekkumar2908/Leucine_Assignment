@@ -11,7 +11,7 @@ const ViewAllAssignments = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await axiosInstance.get("/api/assignments");
+      const response = await axiosInstance.get("http://localhost:8080/api/assignments");
       setAssignments(response.data);
     } catch (error) {
       console.error("Error fetching assignments:", error);

@@ -1,10 +1,13 @@
 package com.leucine.Assignment.controller;
 
 import com.leucine.Assignment.dto.AssignmentDTO;
+import com.leucine.Assignment.dto.SubmittedAssignmentDTO;
 import com.leucine.Assignment.enums.ClassName;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 public interface AssignmentController {
 
@@ -22,4 +25,6 @@ public interface AssignmentController {
     @PutMapping("/{id}")
     ResponseEntity<Object> updateAssignment(@PathVariable Long id, @ModelAttribute AssignmentDTO assignmentDTO);
 
-}
+    List<SubmittedAssignmentDTO> getAssignmentSummary(@RequestParam ClassName className);
+
+    }
