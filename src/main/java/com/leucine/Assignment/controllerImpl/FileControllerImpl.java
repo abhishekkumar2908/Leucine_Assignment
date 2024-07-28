@@ -30,8 +30,10 @@ public class FileControllerImpl implements FileController {
     @Value("${file.base-directory}")
     private String baseDirectory;
 
+    @Value("${server.address}")
+    private String serverAddress;
 
-    @GetMapping("/files/{id}")
+    @GetMapping("/file-resource/{id}")
     @Override
     public ResponseEntity<Resource> getFile(@PathVariable Long id) {
         try {
@@ -64,6 +66,14 @@ public class FileControllerImpl implements FileController {
         }
     }
 
+    @GetMapping("/file-path/{fileName}")
+    @Override
+    public ResponseEntity<String> getFileUrl(String fileName) {
+        return ResponseEntity.ok(serverAddress + "/api/assignments/files/" + fileName);
+
+    }
+
+
     private String determineContentType(Path filePath) {
         try {
             return Files.probeContentType(filePath);
@@ -71,5 +81,4 @@ public class FileControllerImpl implements FileController {
             return null;
         }
     }
-
 }

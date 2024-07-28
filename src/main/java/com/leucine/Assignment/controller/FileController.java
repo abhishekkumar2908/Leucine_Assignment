@@ -9,4 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface FileController {
 
     public ResponseEntity<Resource> getFile( @NotNull @PathVariable Long id);
+
+    public ResponseEntity<String> getFileUrl(@PathVariable String fileName);
+
 }

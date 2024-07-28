@@ -1,35 +1,38 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import axiosInstance from "../axiosConfig";
-import "./Login.css";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [errorMessage, setErrorMessage] = useState("");
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post("/api/auth/login", data); // Ensure this matches your backend endpoint
-      localStorage.setItem("token", response.data.token);
-      // Redirect to the dashboard or appropriate page based on role
-      const userRole = data.role.toUpperCase();
-      if (userRole === "TEACHER") {
-        window.location.href = "/teacher-dashboard"; // Adjust the path as needed
-      } else if (userRole === "STUDENT") {
-        window.location.href = "/student-dashboard"; // Adjust the path as needed
+      const response = await fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        // Assuming the response contains a token and user role
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('role', result.role);
+
+        if (result.role === 'TEACHER') {
+          navigate('/teacher-dashboard');
+        } else if (result.role === 'STUDENT') {
+          navigate('/student-dashboard');
+        }
+      } else {
+        setErrorMessage('Invalid username or password.');
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage("Invalid credentials. Please try again.");
-      } else if (error.response && error.response.status === 403) {
-        setErrorMessage("Invalid role selected.");
-      } else {
-        setErrorMessage("An error occurred. Please try again later.");
-      }
+      setErrorMessage('An error occurred. Please try again later.');
     }
   };
 
@@ -40,20 +43,17 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Username</label>
-          <input type="text" {...register("username", { required: true })} />
+          <input type="text" {...register('username', { required: true })} />
           {errors.username && <span>This field is required</span>}
         </div>
         <div>
           <label>Password</label>
-          <input
-            type="password"
-            {...register("password", { required: true })}
-          />
+          <input type="password" {...register('password', { required: true })} />
           {errors.password && <span>This field is required</span>}
         </div>
         <div>
           <label>Role</label>
-          <select {...register("role", { required: true })}>
+          <select {...register('role', { required: true })}>
             <option value="">Select role</option>
             <option value="TEACHER">Teacher</option>
             <option value="STUDENT">Student</option>

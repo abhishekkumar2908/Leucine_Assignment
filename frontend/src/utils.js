@@ -1,10 +1,17 @@
-// utils.js
-export default function getUserRole(token) {
-    if (!token) {
-      return null;
-    }
-    
-    // Decode the token to extract user role (assuming it's a JWT)
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.role; // Assuming the role is stored in the payload
+import { jwtDecode } from "jwt-decode";
+
+export class UerRole {
+  static TEACHER = "ROLE_TEACHER";
+}
+
+const getUserRole = (token = localStorage.getItem("token")) => {
+  try {
+    const user = jwtDecode(token);
+    if (user.role === UerRole.TEACHER) return true;
+  } catch (error) {
+    console.error("Invalid token:", error);
+    return null;
   }
+};
+
+export default getUserRole;
