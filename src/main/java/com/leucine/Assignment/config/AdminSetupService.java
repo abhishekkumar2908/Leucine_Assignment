@@ -4,6 +4,7 @@ import com.leucine.Assignment.dao.Classes;
 import com.leucine.Assignment.enums.ClassName;
 import com.leucine.Assignment.enums.UserRole;
 import com.leucine.Assignment.dao.User;
+import com.leucine.Assignment.repository.ClassRepository;
 import com.leucine.Assignment.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
@@ -19,6 +20,9 @@ public class AdminSetupService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ClassRepository classRepository;
 
     @PostConstruct
     @Transactional
@@ -56,6 +60,7 @@ public class AdminSetupService {
                     .studentId(user.getUserId())
                     .className(ClassName.XI)
                     .build();
+            classRepository.save(classes);
         } else {
             System.out.println("Student already exists");
         }

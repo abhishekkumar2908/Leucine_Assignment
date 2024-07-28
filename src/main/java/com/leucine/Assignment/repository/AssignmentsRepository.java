@@ -16,6 +16,5 @@ public interface AssignmentsRepository extends JpaRepository<Assignments, Long> 
 
     List<Assignments> findByCreatedBy(Long createdBy);
 
-    @Query("SELECT a FROM Assignments a WHERE a.className = :className AND a.createdBy = :userId")
-    Object findByClassName(ClassName className, Long userId);
+    List<Assignments> findByClassNameAndCreatedBy(ClassName className, Long userId);
 }

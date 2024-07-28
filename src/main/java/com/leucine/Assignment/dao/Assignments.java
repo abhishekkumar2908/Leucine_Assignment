@@ -28,10 +28,7 @@ public class Assignments {
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
-    @JsonIgnore
-    @Lob
-    @Column(name = "data")
-    private byte[] data;
+
 
     @Column(name = "file")
     private String file;
