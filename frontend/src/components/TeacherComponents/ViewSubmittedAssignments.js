@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../axiosConfig";
 import "./TeacherDashboardPage.css";
+import { Axios } from "../../axiosConfig";
 
 const ViewSubmittedAssignments = () => {
   const [submissions, setSubmissions] = useState([]);
@@ -16,7 +16,7 @@ const ViewSubmittedAssignments = () => {
 
   const fetchSubmissions = async () => {
     try {
-      const response = await axiosInstance.get("/api/submissions");
+      const response = await Axios.get("/submissions");
       setSubmissions(response.data);
     } catch (error) {
       console.error("Error fetching submissions:", error);

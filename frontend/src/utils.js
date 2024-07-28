@@ -14,4 +14,8 @@ const getUserRole = (token = localStorage.getItem("token")) => {
   }
 };
 
+export const isUserLoggedIn = () => {
+  return localStorage.getItem("token") ? true : false;
+};
+
 export default getUserRole;
