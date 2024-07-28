@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../axiosConfig";
 import "./TeacherDashboardPage.css";
+import { Axios } from "../../axiosConfig";
 
 const ViewAllAssignments = () => {
   const [assignments, setAssignments] = useState([]);
@@ -11,7 +11,7 @@ const ViewAllAssignments = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await axiosInstance.get("http://localhost:8080/api/assignments");
+      const response = await Axios.get("/assignments");
       setAssignments(response.data);
     } catch (error) {
       console.error("Error fetching assignments:", error);
@@ -20,7 +20,7 @@ const ViewAllAssignments = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axiosInstance.delete(`/api/assignments/${id}`);
+      await Axios.delete(`/assignments/${id}`);
       setAssignments(assignments.filter((assignment) => assignment.id !== id));
     } catch (error) {
       console.error("Error deleting assignment:", error);

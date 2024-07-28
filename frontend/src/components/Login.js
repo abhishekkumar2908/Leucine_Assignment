@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import './Login.css';
+import { Axios } from '../axiosConfig';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -7,23 +9,21 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+      const response = await Axios.post ( '/auth/login', {
+        username: data.username,
+        password: data.password,
+        role: data.role
       });
 
-      if (response.ok) {
-        const result = await response.json();
+      console.log("response", response);
+      if (response) {
         // Assuming the response contains a token and user role
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('role', result.role);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role);
 
-        if (result.role === 'TEACHER') {
+        if (response.role === 'TEACHER') {
           window.location.href = '/';
-        } else if (result.role === 'STUDENT') {
+        } else if (response.role === 'STUDENT') {
           window.location.href = '/student-dashboard';
         } else {
           window.location.href = '/';
@@ -32,7 +32,7 @@ const Login = () => {
         setErrorMessage('Invalid username or password.');
       }
     } catch (error) {
-      setErrorMessage('An error occurred. Please try again later.');
+      setErrorMessage(error?.message);
     }
   };
 

@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import TeacherDashboardPage from "./components/TeacherComponents/TeacherDashboardPage";
 import getUserRole from "./utils";
 import Header from "./components/Header";
+import AddAssignment from "./components/TeacherComponents/AddAssignment";
 
 export const getRoutes = () => {
   const isLoggedIn = localStorage.getItem("token");
@@ -22,9 +23,13 @@ export const getRoutes = () => {
 
   const teacherRoutes = [
     {
-      path: "/*",
+      path: "/",
       element: <TeacherDashboardPage />,
     },
+    {
+      path: "/add-assignment",
+      element: <AddAssignment />,
+    }
   ];
 
   const studentRoutes = [];

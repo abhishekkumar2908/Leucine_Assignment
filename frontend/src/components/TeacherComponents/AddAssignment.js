@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./AddAssignment.css"; // Import the CSS file
-import axios from "axios"; // Import axios instead of axiosInstance
+import "./AddAssignment.css";
+import { Axios } from "../../axiosConfig";
 
 const AddAssignment = () => {
   const [title, setTitle] = useState("");
@@ -28,7 +28,7 @@ const AddAssignment = () => {
     formData.append("className", className);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/assignments", formData, {
+      const response = await Axios.post("/assignments", formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the headers
         },
@@ -83,7 +83,7 @@ const AddAssignment = () => {
             <option value="XII">12th</option>
           </select>
         </div>
-        <button type="submit">Create Assignment</button>
+        <button className = "submit-button" type="submit">Create Assignment</button>
       </form>
     </div>
   );

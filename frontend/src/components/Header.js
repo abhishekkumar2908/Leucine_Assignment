@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Header.css"; // Import CSS for styling
+import { isUserLoggedIn } from "../utils";
 
 const Header = () => {
 
@@ -12,9 +13,12 @@ const Header = () => {
   return (
     <header className="header">
       <h1>My Application</h1>
-      <button className="logout-button" onClick={handleLogout}>
+      {
+        isUserLoggedIn() && 
+        <button className="logout-button" onClick={handleLogout}>
         Logout
-      </button>
+        </button>
+      }
     </header>
   );
 };

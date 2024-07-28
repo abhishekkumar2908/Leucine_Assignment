@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./TeacherDashboardPage.css";
-import axios from "axios";
 import PieChartRecharts from "../Chart";
+import { Axios } from "../../axiosConfig";
 
 const TeacherDashboard = () => {
   const [summaryXI, setSummaryXI] = useState({
-    totalAssignments: 0,
-    totalSubmissions: 0,
+    totalAssignments: 5,
+    totalSubmissions: 2,
     upcomingDeadlines: [],
   });
 
   const [summaryXII, setSummaryXII] = useState({
-    totalAssignments: 0,
-    totalSubmissions: 0,
+    totalAssignments: 7,
+    totalSubmissions: 2,
     upcomingDeadlines: [],
   });
 
@@ -25,15 +25,11 @@ const TeacherDashboard = () => {
 
   const fetchSummary = async (className, setSummary) => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/assignments/summary?classNam=${className}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await Axios.get(
+        `/assignments/summary?className=${className}`
+        
       );
-      setSummary(response.data);
+      // setSummary(response.data);
     } catch (error) {
       console.error(`Error fetching summary data for Class ${className}:`, error);
     }
@@ -41,14 +37,14 @@ const TeacherDashboard = () => {
 
   const renderSummary = (summary, className) => (
     <div className="summary">
-      <div>Total Assignments for Class {className}: {summary.totalAssignments}</div>
-      <div>Total Submissions for Class {className}: {summary.totalSubmissions}</div>
+      <div>Total Assignments for Class {className}: {summary?.totalAssignments}</div>
+      <div>Total Submissions for Class {className}: {summary?.totalSubmissions}</div>
       <div>Upcoming Deadlines for Class {className}:</div>
-      {summary.upcomingDeadlines.length > 0 ? (
+      {summary?.upcomingDeadlines?.length > 0 ? (
         <ul>
-          {summary.upcomingDeadlines.map((deadline) => (
-            <li key={deadline.id}>
-              {deadline.title} - {deadline.dueDate}
+          {summary?.upcomingDeadlines?.map((deadline) => (
+            <li key={deadline?.id}>
+              {deadline?.title} - {deadline?.dueDate}
             </li>
           ))}
         </ul>
@@ -66,14 +62,14 @@ const TeacherDashboard = () => {
       <div className="content-container">
         <PieChartRecharts
           data={[
-            { name: "Submitted by Students", value: summaryXI.totalSubmissions },
-            { name: "Remaining", value: summaryXI.totalAssignments - summaryXI.totalSubmissions },
+            { name: "Submitted by Students", value: summaryXI?.totalSubmissions },
+            { name: "Remaining", value: summaryXI?.totalAssignments - summaryXI?.totalSubmissions },
           ]}
         />
         <PieChartRecharts
           data={[
-            { name: "Submitted by Students", value: summaryXII.totalSubmissions },
-            { name: "Remaining", value: summaryXII.totalAssignments - summaryXII.totalSubmissions },
+            { name: "Submitted by Students", value: summaryXII?.totalSubmissions },
+            { name: "Remaining", value: summaryXII?.totalAssignments - summaryXII?.totalSubmissions },
           ]}
         />
       </div>
