@@ -16,7 +16,10 @@ public interface AssignmentController {
     @PostMapping(consumes = {"multipart/form-data"})
     ResponseEntity<Object> createAssignment(@ModelAttribute AssignmentDTO assignmentDTO);
 
-    @GetMapping("/assignments/{className}")
+    @GetMapping("/{className}")
     ResponseEntity<Object> getAssignmentsByClass(@PathVariable ClassName className);
+
+    @GetMapping("")
+    ResponseEntity<Object> getAssignments();
 
 }

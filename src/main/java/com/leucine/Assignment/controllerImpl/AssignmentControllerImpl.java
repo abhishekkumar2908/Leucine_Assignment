@@ -1,6 +1,7 @@
 package com.leucine.Assignment.controllerImpl;
 
 import com.leucine.Assignment.controller.AssignmentController;
+import com.leucine.Assignment.dao.Assignments;
 import com.leucine.Assignment.dto.AssignmentDTO;
 import com.leucine.Assignment.enums.ClassName;
 import com.leucine.Assignment.service.AssignmentService;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/assignments", produces = "application/json")
@@ -37,6 +39,15 @@ public class AssignmentControllerImpl implements AssignmentController {
     public ResponseEntity<Object> getAssignmentsByClass(ClassName className) {
         return ResponseEntity.ok(assignmentService.getAssignments(className, userService.getUserId()));
     }
+
+    @Override
+    public ResponseEntity<Object> getAssignments() {
+        List<Assignments> assignments = assignmentService.getAssignmentsCreatedBy(userService.getUserId());
+        if (assignments.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(assignments);    }
 
 
 }

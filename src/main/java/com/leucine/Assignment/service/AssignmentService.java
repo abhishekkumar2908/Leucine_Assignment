@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class AssignmentService {
@@ -35,5 +36,9 @@ public class AssignmentService {
 
     public Object getAssignments(ClassName className, Long userId) {
         return assignmentsRepository.findByClassName(className, userId);
+    }
+
+    public List<Assignments> getAssignmentsCreatedBy(Long userId) {
+        return assignmentsRepository.findByCreatedBy(userId);
     }
 }
