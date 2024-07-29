@@ -1,0 +1,75 @@
+/* ViewAllAssignments.css */
+
+.view-all-assignments-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-all-assignments-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.view-all-assignments-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.view-all-assignments-container th,
+.view-all-assignments-container td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.view-all-assignments-container th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.view-all-assignments-container tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.view-all-assignments-container tr:hover {
+  background-color: #f1f1f1;
+}
+
+.view-all-assignments-container button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.view-all-assignments-container button:hover {
+  background-color: #0056b3;
+}
+
+.view-all-assignments-container button + button {
+  margin-left: 8px;
+}
+
+button.delete {
+  background-color: #dc3545;
+}
+
+tbody tr td:last-child {
+  text-align: center;
+}
+
+.classSelection{
+    margin-bottom: 20px;
+    
+    
+}

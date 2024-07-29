@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./TeacherDashboardPage.css";
+import "./ViewAllAssignments.css";
 import { Axios } from "../../axiosConfig";
 
 const ViewAllAssignments = () => {
   const [assignments, setAssignments] = useState([]);
+  const [selectedClass, setSelectedClass] = useState("XI");
 
   useEffect(() => {
     fetchAssignments();
-  }, []);
+  }, [selectedClass]);
 
   const fetchAssignments = async () => {
     try {
-      const response = await Axios.get("/assignments");
+      const response = await Axios.get(`/assignments/${selectedClass}`);
       setAssignments(response.data);
     } catch (error) {
       console.error("Error fetching assignments:", error);
@@ -30,6 +31,10 @@ const ViewAllAssignments = () => {
   return (
     <div className="view-all-assignments-container">
       <h2>View All Assignments</h2>
+      <div className="classSelection">
+        <button onClick={() => setSelectedClass("XI")}>Class XI</button>
+        <button onClick={() => setSelectedClass("XII")}>Class XII</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -40,18 +45,22 @@ const ViewAllAssignments = () => {
           </tr>
         </thead>
         <tbody>
-          {assignments.map((assignment) => (
-            <tr key={assignment.id}>
-              <td>{assignment.title}</td>
-              <td>{assignment.className}</td>
-              <td>{assignment.dueDate}</td>
-              <td>
-                <button onClick={() => handleDelete(assignment.id)}>Delete</button>
-                {/* Implement Edit functionality */}
-                <button>Edit</button>
-              </td>
+        {assignments && assignments.length > 0 ? (
+            assignments.map((assignment) => (
+              <tr key={assignment.id}>
+                <td>{assignment.title}</td>
+                <td>{assignment.className}</td>
+                <td>{new Date(assignment.dueDate).toLocaleDateString()}</td>
+                <td>
+                  <button onClick={() => handleDelete(assignment.id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No assignments found</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

@@ -5,14 +5,14 @@ import { Axios } from "../../axiosConfig";
 
 const TeacherDashboard = () => {
   const [summaryXI, setSummaryXI] = useState({
-    totalAssignments: 5,
-    totalSubmissions: 2,
+    totalAssignments: 0,
+    totalSubmissions: 0,
     upcomingDeadlines: [],
   });
 
   const [summaryXII, setSummaryXII] = useState({
-    totalAssignments: 7,
-    totalSubmissions: 2,
+    totalAssignments: 0,
+    totalSubmissions: 0,
     upcomingDeadlines: [],
   });
 
