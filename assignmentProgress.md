@@ -62,6 +62,9 @@ Based on the role User will be redirected to resepective page.
    Integrated update and delete action also.
   <img width="701" alt="Screenshot 2024-07-29 at 11 35 37 PM" src="https://github.com/user-attachments/assets/e009cb3c-fe91-43cf-ad45-2ae93c1f4bfc">
 
+  Integrated view action in order to view in details.
+  <img width="705" alt="Screenshot 2024-07-30 at 12 58 10 AM" src="https://github.com/user-attachments/assets/fc477d1a-bdec-4170-b1ea-8454a2d1d6d0">
+  
 
  D. Dashboard
 At the time of login if user role selected is TEACHER then it will be redirected to the dashboard board which will look like this.
