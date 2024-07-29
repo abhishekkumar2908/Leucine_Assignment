@@ -58,7 +58,10 @@ Based on the role User will be redirected to resepective page.
 
    Along with that created a update api for the same 
    <img width="844" alt="Screenshot 2024-07-28 at 3 33 16 PM" src="https://github.com/user-attachments/assets/8cd7ded3-b9ba-4acf-9ae1-c1d0abd6b177">
-   Prepared a page for view assignments. Connection from backend is remaining. 
+   Prepared a page for view assignments. Based on the class selected, teacher can view all his created assignments. 
+   Integrated update and delete action also.
+  <img width="701" alt="Screenshot 2024-07-29 at 11 35 37 PM" src="https://github.com/user-attachments/assets/e009cb3c-fe91-43cf-ad45-2ae93c1f4bfc">
+
 
  D. Dashboard
 At the time of login if user role selected is TEACHER then it will be redirected to the dashboard board which will look like this.
@@ -69,6 +72,8 @@ It will display total assignment submitted and pending
 
 The agenda is to display that chart along with Upcoming Deadlines. 
 <img width="349" alt="Screenshot 2024-07-28 at 11 40 25 PM" src="https://github.com/user-attachments/assets/7fc2435f-7a4e-421e-ac7d-27e51ffd5e15">
+<img width="632" alt="Screenshot 2024-07-29 at 11 38 48 PM" src="https://github.com/user-attachments/assets/f6739c55-b5d2-4fda-b9ac-1e315cf09781">
+
 
 3. Student Interface
    Working on it.
