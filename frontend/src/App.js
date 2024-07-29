@@ -6,6 +6,7 @@ import getUserRole from "./utils";
 import Header from "./components/Header";
 import AddAssignment from "./components/TeacherComponents/AddAssignment";
 import ViewAllAssignments from "./components/TeacherComponents/ViewAllAssignments";
+import ViewSubmittedAssignments from "./components/TeacherComponents/ViewSubmittedAssignments";
 
 export const getRoutes = () => {
   const isLoggedIn = localStorage.getItem("token");
@@ -34,6 +35,10 @@ export const getRoutes = () => {
     {
       path: "/view-all-assignments",
       element: <ViewAllAssignments/>,
+    },
+    {
+      path: "/view-submitted-assignments",
+      element: <ViewSubmittedAssignments />,
     }
   ];
 

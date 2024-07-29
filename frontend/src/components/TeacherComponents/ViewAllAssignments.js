@@ -15,17 +15,13 @@ const ViewAllAssignments = () => {
       console.log(`Fetching assignments for class: ${selectedClass}`);
       const response = await Axios.get(`/assignments/${selectedClass}`);
       console.log('Response:', response);
-      const data = response; // Directly use response.data
-      console.log('Data:', data);
-      if (Array.isArray(data)) {
+      const data = response; 
+      
         setAssignments(data);
-      } else {
-        console.error("Data is not an array:", data);
-        setAssignments([]);
-      }
+      
     } catch (error) {
       console.error("Error fetching assignments:", error);
-      setAssignments([]); // Set assignments to an empty array on error
+      setAssignments([]); 
     }
   };
 
@@ -35,8 +31,12 @@ const ViewAllAssignments = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(`Delete assignment with id: ${id}`);
-    // Add your delete logic here
+    try {
+      Axios.delete(`/assignments/${id}`);
+      setAssignments(assignments.filter((assignment) => assignment.id !== id));
+    } catch (error) {
+      console.error("Error deleting assignment:", error);
+    }
   };
 
   return (
