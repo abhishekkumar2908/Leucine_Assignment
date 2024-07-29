@@ -17,7 +17,7 @@ const ViewSubmittedAssignments = () => {
   const fetchSubmissions = async () => {
     try {
       const response = await Axios.get("/submissions");
-      setSubmissions(response.data);
+      setSubmissions(response);
     } catch (error) {
       console.error("Error fetching submissions:", error);
     }
