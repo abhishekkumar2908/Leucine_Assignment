@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import TeacherDashboard from "./TeacherDashboard";
-import AddAssignment from "./AddAssignment";
 import "./TeacherDashboardPage.css";
 
 const TeacherDashboardPage = () => {

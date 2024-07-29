@@ -12,20 +12,31 @@ const ViewAllAssignments = () => {
 
   const fetchAssignments = async () => {
     try {
+      console.log(`Fetching assignments for class: ${selectedClass}`);
       const response = await Axios.get(`/assignments/${selectedClass}`);
-      setAssignments(response.data);
+      console.log('Response:', response);
+      const data = response; // Directly use response.data
+      console.log('Data:', data);
+      if (Array.isArray(data)) {
+        setAssignments(data);
+      } else {
+        console.error("Data is not an array:", data);
+        setAssignments([]);
+      }
     } catch (error) {
       console.error("Error fetching assignments:", error);
+      setAssignments([]); // Set assignments to an empty array on error
     }
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await Axios.delete(`/assignments/${id}`);
-      setAssignments(assignments.filter((assignment) => assignment.id !== id));
-    } catch (error) {
-      console.error("Error deleting assignment:", error);
-    }
+  const handleUpdate = (id) => {
+    console.log(`Update assignment with id: ${id}`);
+    // Add your update logic here
+  };
+
+  const handleDelete = (id) => {
+    console.log(`Delete assignment with id: ${id}`);
+    // Add your delete logic here
   };
 
   return (
@@ -41,24 +52,25 @@ const ViewAllAssignments = () => {
             <th>Assignment Title</th>
             <th>Class</th>
             <th>Due Date</th>
-            <th>Actions</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-        {assignments && assignments.length > 0 ? (
+          {assignments.length > 0 ? (
             assignments.map((assignment) => (
               <tr key={assignment.id}>
                 <td>{assignment.title}</td>
                 <td>{assignment.className}</td>
                 <td>{new Date(assignment.dueDate).toLocaleDateString()}</td>
                 <td>
+                  <button onClick={() => handleUpdate(assignment.id)}>Update</button>
                   <button onClick={() => handleDelete(assignment.id)}>Delete</button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4">No assignments found</td>
+              <td colSpan="4">No assignments found.</td>
             </tr>
           )}
         </tbody>
