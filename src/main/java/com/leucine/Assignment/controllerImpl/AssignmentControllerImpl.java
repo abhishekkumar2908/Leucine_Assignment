@@ -4,7 +4,7 @@ import com.leucine.Assignment.controller.AssignmentController;
 import com.leucine.Assignment.dao.Assignments;
 import com.leucine.Assignment.dao.SubmittedAssignment;
 import com.leucine.Assignment.dto.AssignmentDTO;
-import com.leucine.Assignment.dto.SubmittedAssignmentDTO;
+import com.leucine.Assignment.dto.AssignmentSummaryDTO;
 import com.leucine.Assignment.enums.ClassName;
 import com.leucine.Assignment.service.AssignmentService;
 import com.leucine.Assignment.service.SubmissionService;
@@ -19,7 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,7 +34,6 @@ public class AssignmentControllerImpl implements AssignmentController {
     @Autowired
     private SubmissionService submissionService;
 
-    private static final Logger LOGGER = Logger.getLogger(AssignmentControllerImpl.class.getName());
 
     @Override
     public ResponseEntity<Object> createAssignment(@ModelAttribute AssignmentDTO assignmentDTO) {
@@ -91,28 +89,38 @@ public class AssignmentControllerImpl implements AssignmentController {
 
     @GetMapping("/summary")
     @Override
-    public List<SubmittedAssignmentDTO> getAssignmentSummary(@RequestParam ClassName className) {
-        LOGGER.info("Received request for assignment summary for class: " + className);
+    public ResponseEntity<Object> getAssignmentSummary(@RequestParam ClassName className) {
 
         List<Assignments> assignments = assignmentService.getAssignmentsByTeacherAndClass(userService.getUserId(), className);
-        LOGGER.info("Assignments fetched: " + assignments.size());
-
         List<Long> assignmentIds = assignments.stream().map(Assignments::getId).collect(Collectors.toList());
         List<SubmittedAssignment> submittedAssignments = submissionService.getSubmittedAssignmentsByAssignmentIds(assignmentIds);
-        LOGGER.info("Submitted assignments fetched: " + submittedAssignments.size());
 
-        return submittedAssignments.stream().map(submission -> {
-            Assignments assignment = assignments.stream()
-                    .filter(a -> a.getId().equals(submission.getAssignmentId()))
-                    .findFirst()
-                    .orElse(null);
+        LocalDateTime upcomingDueDate = assignments.stream()
+                .map(Assignments::getDueDate)
+                .filter(dueDate -> dueDate.isAfter(LocalDateTime.now()))
+                .min(LocalDateTime::compareTo)
+                .orElse(null);
 
-            return SubmittedAssignmentDTO.builder()
-                    .assignmentTitle(assignment != null ? assignment.getTitle() : null)
-                     // Replace with actual student name if available
-                    .submissionDate(submission.getSubmissionDate())
-                    .className(className)
-                    .build();
-        }).collect(Collectors.toList());
+        AssignmentSummaryDTO summaryDTO = AssignmentSummaryDTO.builder()
+                .totalAssignments(assignments.size())
+                .totalSubmittedAssignments(submittedAssignments.size())
+                .upcomingDueDate(upcomingDueDate)
+                .build();
+
+        return ResponseEntity.ok(summaryDTO);
     }
+
+    @Override
+    public ResponseEntity<Object> deleteAssignment(Long id) {
+        Optional<Assignments> assignmentsFromDocDb = assignmentService.getAssignmentById(id);
+        assignmentsFromDocDb.ifPresent(assignments -> {
+            if (!Objects.equals(assignments.getCreatedBy(), userService.getUserId())) {
+                throw new RuntimeException("You are not authorized to delete this assignment");
+            }
+            assignmentService.deleteAssignment(id);
+        });
+        return ResponseEntity.ok(assignmentsFromDocDb);
+    }
+
+
 }

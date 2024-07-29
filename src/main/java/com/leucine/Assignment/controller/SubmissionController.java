@@ -14,7 +14,7 @@ public interface SubmissionController {
 
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     @PostMapping(consumes = {"multipart/form-data"})
-    ResponseEntity<Object> createSubmission(@ModelAttribute SubmissionDTO submissionDTO) throws IOException;
+    ResponseEntity<Object> submitAssignment(@ModelAttribute SubmissionDTO submissionDTO) throws IOException;
 
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")

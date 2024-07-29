@@ -58,4 +58,7 @@ public class AssignmentService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteAssignment(Long id) {
+        assignmentsRepository.deleteById(id);
+    }
 }

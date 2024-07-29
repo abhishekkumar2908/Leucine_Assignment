@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./Header.css"; // Import CSS for styling
 import { isUserLoggedIn } from "../utils";
 

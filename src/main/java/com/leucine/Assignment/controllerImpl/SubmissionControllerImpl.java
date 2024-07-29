@@ -21,8 +21,8 @@ public class SubmissionControllerImpl implements SubmissionController {
     private UserService userService;
 
     @Override
-    public ResponseEntity<Object> createSubmission(SubmissionDTO submissionDTO) {
-        return ResponseEntity.ok(submissionService.createSubmission(submissionDTO, userService.getUserId()));
+    public ResponseEntity<Object> submitAssignment(SubmissionDTO submissionDTO) {
+        return ResponseEntity.ok(submissionService.submitAssignment(submissionDTO, userService.getUserId()));
     }
 
 
